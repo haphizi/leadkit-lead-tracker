@@ -15,7 +15,7 @@ inputBtn.addEventListener("click", function () {
 function renderLeads() {
   let listItems = "";
   for (let i = 0; i < myLeads.length; i++) {
-    // 2. Add the item to the listItems variable instead of the ulEl.innerHTML
+    // Add the item to the listItems variable instead of the ulEl.innerHTML
 
     // listItems += "<li><a target='_blank' href='" + myLeads[i] + "'>" + myLeads[i] + "</a></li>"
 
@@ -30,6 +30,6 @@ function renderLeads() {
     //   ulEl.append(li)
   }
 
-  // 3. Render the listItems inside the unordered list using ulEl.innerHTML
+  //  Render the listItems inside the unordered list using ulEl.innerHTML
   ulEl.innerHTML = listItems;
 }
