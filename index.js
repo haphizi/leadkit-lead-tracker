@@ -1,13 +1,35 @@
-let myLeads = [];
+let myLeads = `["www.example.com"]`;
 const inputEl = document.getElementById("input-el");
 
 const inputBtn = document.getElementById("input-btn");
 
 const ulEl = document.getElementById("ul-el");
 
+
+//localstorage only accepts strings
+// 1. Turn the myLeads string into an array
+console.log(typeof myLeads)
+myLeads = JSON.parse(myLeads)
+console.log(typeof myLeads)
+// 2. Push a new value to the array
+myLeads.push("www.zz.com")
+console.log(myLeads)
+// 3. Turn the array into a string again
+myLeads = JSON.stringify(myLeads)
+// 4. Console.log the string using typeof to verify that it's a string
+console.log(typeof myLeads)
+
+
+
 // better separation of concerns, doesnt use onclick method
 inputBtn.addEventListener("click", function () {
   myLeads.push(inputEl.value);
+
+  // test localStorage usage to save leads
+  localStorage.setItem("myLeads", "www.example.com");
+  let getLocal = localStorage.getItem("myLeads");
+  console.log(getLocal);
+  
   renderLeads();
   inputEl.value = "";
 });
