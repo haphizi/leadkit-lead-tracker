@@ -9,17 +9,17 @@ const ulEl = document.getElementById("ul-el");
 inputBtn.addEventListener("click", function () {
   myLeads.push(inputEl.value);
   renderLeads();
-  inputEl.value = ""
+  inputEl.value = "";
 });
-
 
 function renderLeads() {
   let listItems = "";
   for (let i = 0; i < myLeads.length; i++) {
     // 2. Add the item to the listItems variable instead of the ulEl.innerHTML
 
-    listItems += "<li><a target='_blank' href='" + myLeads[i] + "'>" + myLeads[i] + "</a></li>"
+    // listItems += "<li><a target='_blank' href='" + myLeads[i] + "'>" + myLeads[i] + "</a></li>"
 
+    listItems += `<li><a target='_blank' href='${myLeads[i]}'>${myLeads[i]}</a></li>`;
 
     //method .1
     //   ulEl.innerHTML += "<li>" + myLeads[i] + "</li>";
