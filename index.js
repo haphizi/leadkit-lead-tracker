@@ -1,4 +1,5 @@
 let myLeads = [];
+let oldLeads = []
 const inputEl = document.getElementById("input-el");
 
 const inputBtn = document.getElementById("input-btn");
@@ -14,14 +15,14 @@ const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
 // 2. If so, set myLeads to its value and call renderLeads()
 if (leadsFromLocalStorage) {
   myLeads = leadsFromLocalStorage;
-  renderLeads();
+  render(leads);
 }
 
 deleteBtn.addEventListener("dblclick", function () {
   // When clicked, clear localStorage, myLeads, and the DOM
   localStorage.clear();
   myLeads = [];
-  renderLeads();
+  render(myLeads);
   // ulEl.innerHTML = null;
 });
 
@@ -29,26 +30,26 @@ deleteBtn.addEventListener("dblclick", function () {
 inputBtn.addEventListener("click", function () {
   myLeads.push(inputEl.value);
   inputEl.value = "";
-  renderLeads();
+  render(myLeads);
   // Save the myLeads array to localStorage
   localStorage.setItem("myLeads", JSON.stringify(myLeads));
 });
 
-function renderLeads() {
+function render(leads) {
   let listItems = "";
-  for (let i = 0; i < myLeads.length; i++) {
+  for (let i = 0; i < leads.length; i++) {
     // Add the item to the listItems variable instead of the ulEl.innerHTML
 
     // listItems += "<li><a target='_blank' href='" + myLeads[i] + "'>" + myLeads[i] + "</a></li>"
 
-    listItems += `<li><a target='_blank' href='${myLeads[i]}'>${myLeads[i]}</a></li>`;
+    listItems += `<li><a target='_blank' href='${leads[i]}'>${leads[i]}</a></li>`;
 
     //method .1
-    //   ulEl.innerHTML += "<li>" + myLeads[i] + "</li>";
+    //   ulEl.innerHTML += "<li>" + leads[i] + "</li>";
 
     // method .2 to createElement and append...
     //   const li = document.createElement("li")
-    //   li.textContent = myLeads[i]
+    //   li.textContent = leads[i]
     //   ulEl.append(li)
   }
 
