@@ -1,5 +1,5 @@
 let myLeads = [];
-let oldLeads = []
+let oldLeads = [];
 const inputEl = document.getElementById("input-el");
 
 const inputBtn = document.getElementById("input-btn");
@@ -8,15 +8,25 @@ const ulEl = document.getElementById("ul-el");
 
 const deleteBtn = document.getElementById("delete-btn");
 
+const tabBtn = document.getElementById("tab-btn");
+
 // Get the leads from the localStorage as array and log it out
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
 
-// 1. Check if leadsFromLocalStorage is truthy
-// 2. If so, set myLeads to its value and call renderLeads()
+// 1. Check if leadsFromLocalStorage is truthy. If so, set myLeads to its value and call renderLeads()
 if (leadsFromLocalStorage) {
   myLeads = leadsFromLocalStorage;
-  render(leads);
+  render(myLeads);
 }
+
+tabBtn.addEventListener("click", function () {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    myLeads.push(tabs[0].url);
+    render(myLeads);
+  });
+
+  localStorage.setItem("myLeads", JSON.stringify(myLeads));
+});
 
 deleteBtn.addEventListener("dblclick", function () {
   // When clicked, clear localStorage, myLeads, and the DOM
