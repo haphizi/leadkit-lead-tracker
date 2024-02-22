@@ -1,37 +1,27 @@
-let myLeads = `["www.example.com"]`;
+let myLeads = [];
 const inputEl = document.getElementById("input-el");
 
 const inputBtn = document.getElementById("input-btn");
 
 const ulEl = document.getElementById("ul-el");
 
+// Get the leads from the localStorage as array and log it out
+let leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
 
-//localstorage only accepts strings
-// 1. Turn the myLeads string into an array
-console.log(typeof myLeads)
-myLeads = JSON.parse(myLeads)
-console.log(typeof myLeads)
-// 2. Push a new value to the array
-myLeads.push("www.zz.com")
-console.log(myLeads)
-// 3. Turn the array into a string again
-myLeads = JSON.stringify(myLeads)
-// 4. Console.log the string using typeof to verify that it's a string
-console.log(typeof myLeads)
-
-
+// 1. Check if leadsFromLocalStorage is truthy
+// 2. If so, set myLeads to its value and call renderLeads()
+if (leadsFromLocalStorage) {
+  myLeads = leadsFromLocalStorage;
+  renderLeads();
+}
 
 // better separation of concerns, doesnt use onclick method
 inputBtn.addEventListener("click", function () {
   myLeads.push(inputEl.value);
-
-  // test localStorage usage to save leads
-  localStorage.setItem("myLeads", "www.example.com");
-  let getLocal = localStorage.getItem("myLeads");
-  console.log(getLocal);
-  
-  renderLeads();
   inputEl.value = "";
+  renderLeads();
+  // Save the myLeads array to localStorage
+  localStorage.setItem("myLeads", JSON.stringify(myLeads));
 });
 
 function renderLeads() {
@@ -55,3 +45,19 @@ function renderLeads() {
   //  Render the listItems inside the unordered list using ulEl.innerHTML
   ulEl.innerHTML = listItems;
 }
+
+//falsy
+
+// false
+// 0
+// ""
+// null -> how you as a developer signalize emptiness
+// undefined -> how JavaScript signalizes emptiness
+// NaN
+
+// console.log(  Boolean("")   ) // false
+// console.log(  Boolean("0")  ) // true
+// console.log(  Boolean(100)  ) // true
+// console.log(  Boolean(null) ) // false
+// console.log(  Boolean([0])  ) // true
+// console.log(  Boolean(-0)   ) // false
