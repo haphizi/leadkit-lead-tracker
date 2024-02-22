@@ -5,8 +5,10 @@ const inputBtn = document.getElementById("input-btn");
 
 const ulEl = document.getElementById("ul-el");
 
+const deleteBtn = document.getElementById("delete-btn");
+
 // Get the leads from the localStorage as array and log it out
-let leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
+const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
 
 // 1. Check if leadsFromLocalStorage is truthy
 // 2. If so, set myLeads to its value and call renderLeads()
@@ -14,6 +16,14 @@ if (leadsFromLocalStorage) {
   myLeads = leadsFromLocalStorage;
   renderLeads();
 }
+
+deleteBtn.addEventListener("dblclick", function () {
+  // When clicked, clear localStorage, myLeads, and the DOM
+  localStorage.clear();
+  myLeads = [];
+  renderLeads();
+  // ulEl.innerHTML = null;
+});
 
 // better separation of concerns, doesnt use onclick method
 inputBtn.addEventListener("click", function () {
